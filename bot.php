@@ -5,7 +5,7 @@ $content = file_get_contents('php://input');
 // Parse JSON
 $events = json_decode($content, true);
 // Validate parsed JSON data
-
+$id = $arrayJson['events'][0]['source']['userId'];
 if (!is_null($events['events'])) {	
     // Loop through each event	
     foreach ($events['events'] as $event) {		
@@ -15,7 +15,7 @@ if (!is_null($events['events'])) {
             $text = $event['message']['text'];			
             // Get replyToken			
             $replyToken = $event['replyToken'];
-            $id = $event['source']['userId'];
+            // $id = $event['source']['userId'];
             // Build message to reply back			
             $messages = [				
                 'type' => 'text',				
