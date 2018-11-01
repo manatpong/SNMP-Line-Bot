@@ -3,9 +3,10 @@ $access_token = 'VlNYUtXX+kXZs/pnC6M9Ec6/hzWq3G4ya1m+mPwl3FuzdpOwSUaXS5Uquq+Vjx+
 // Get POST body content
 $content = file_get_contents('php://input');
 // Parse JSON
+$id = $arrayJson['events'][0]['source']['userId'];
 $events = json_decode($content, true);
 // Validate parsed JSON data
-$id = $arrayJson['events'][0]['source']['userId'];
+
 if (!is_null($events['events'])) {	
     // Loop through each event	
     foreach ($events['events'] as $event) {		
@@ -19,7 +20,7 @@ if (!is_null($events['events'])) {
             // Build message to reply back			
             $messages = [				
                 'type' => 'text',				
-                'text' => $id			
+                'text' => 'สวัสดี->'.$id.'<-เปนไง'			
             ];			
             // Make a POST Request to Messaging API to reply to sender			
             $url = 'https://api.line.me/v2/bot/message/reply';			
