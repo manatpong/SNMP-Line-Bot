@@ -1,5 +1,5 @@
 <?php 
-$access_token = 'FAIQtDdhcZAWWMH6IQHYOwQIrkZVUGZjLbKu3Gq5xWD/qFkyO+rMwQemlXZWJ0WYhFFigJe/S1zFJh9ydb7rsLP/BYlDmAe98+YmqmSgMXfUE/jOSTW0Uo+vbgprQbLbo50J6IgyA4gHcn6zG/qrrgdB04t89/1O/w1cDnyilFU=';
+$access_token = 'VlNYUtXX+kXZs/pnC6M9Ec6/hzWq3G4ya1m+mPwl3FuzdpOwSUaXS5Uquq+Vjx+qDnLDJP++CZXcHw9I7e7dIIRQxJ9bkWeVG4Oz7Xrp3igW+3+RUcAiWEr6ngqrhSHznf0CIfMwyB5O7BC4LpuIawdB04t89/1O/w1cDnyilFU=';
 // Get POST body content
 $content = file_get_contents('php://input');
 // Parse JSON
@@ -10,15 +10,16 @@ if (!is_null($events['events'])) {
     // Loop through each event	
     foreach ($events['events'] as $event) {		
         // Reply only when message sent is in 'text' format		
-        if ($event['type'] == 'message' && $event['message']['type'] == 'text') {			
+        if ($event['type'] == 'message' && $event['message']['type'] == 'text' && $event['message']['text'] == 'get_room_id:xenoptics') {			
             // Get text sent			
             $text = $event['message']['text'];			
             // Get replyToken			
-            $replyToken = $event['replyToken'];			
+            $replyToken = $event['replyToken'];	
+            
             // Build message to reply back			
             $messages = [				
                 'type' => 'text',				
-                'text' => $text			
+                'text' => $replyToken			
             ];			
             // Make a POST Request to Messaging API to reply to sender			
             $url = 'https://api.line.me/v2/bot/message/reply';			
