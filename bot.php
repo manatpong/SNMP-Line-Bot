@@ -6,6 +6,7 @@ $content = file_get_contents('php://input');
 
 $events = json_decode($content, true);
 // Validate parsed JSON data
+$get_id = $events;
 $id = $events['events'][0]['source']['userId'];
 
 if (!is_null($events['events'])) {	
@@ -21,7 +22,7 @@ if (!is_null($events['events'])) {
             // Build message to reply back			
             $messages = [				
                 'type' => 'text',				
-                'text' => 'สวัสดี->'.json_encode($event).'<-เปนไง'			
+                'text' => 'สวัสดี->'.json_encode($get_id, JSON_PRETTY_PRINT).'<-เปนไง'			
             ];			
             // Make a POST Request to Messaging API to reply to sender			
             $url = 'https://api.line.me/v2/bot/message/reply';			
