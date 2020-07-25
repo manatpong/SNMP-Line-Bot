@@ -16,10 +16,11 @@ if (!is_null($events['events'])) {
             // Get replyToken			
             $replyToken = $event['replyToken'];	
             
+            $profileDat = getProfile();
             // Build message to reply back			
             $messages = [				
                 'type' => 'text',				
-                'text' => $content	
+                'text' => $profileDat	
             ];			
 
             replyMsg($replyToken,$messages);
@@ -46,11 +47,28 @@ if (!is_null($events['events'])) {
     }
 }
 
-function replyMsg($token, $msg) {
+function getProfile() {
+    // https://api.line.me/v2/bot/profile/U37f8dafe34f353b80739886cfa2194a1
+    global $access_token;
+    $url = 'https://api.line.me/v2/bot/profile/U37f8dafe34f353b80739886cfa2194a1';				
+    // $post = json_encode($data);			
+    $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);			
+    $ch = curl_init($url);			
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");			
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);			
+    // curl_setopt($ch, CURLOPT_POSTFIELDS, $post);			
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);			
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);			
+    $result = curl_exec($ch);			
+    curl_close($ch);	
+    return $result;
+}
+
+function replyMsg($replyToken, $msg) {
     global $access_token;
     $url = 'https://api.line.me/v2/bot/message/reply';			
     $data = [				
-        'replyToken' => $token,				
+        'replyToken' => $replyToken,				
         'messages' => [$msg],
         'stickerPackageId' => 1,
         'stickerId' => 1,
