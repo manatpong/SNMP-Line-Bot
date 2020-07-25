@@ -10,7 +10,7 @@ if (!is_null($events['events'])) {
     // Loop through each event	
     foreach ($events['events'] as $event) {		
         // Reply only when message sent is in 'text' format		
-        if ($event['type'] == 'message' && $event['message']['type'] == 'text') {			
+        if (($event['type'] == 'message' && $event['message']['type'] == 'text') || $event['type'] == 'follow') {			
             // Get text sent			
             // $text = 'วิวผีบ้าา';			
             // Get replyToken			
@@ -43,4 +43,4 @@ if (!is_null($events['events'])) {
         }	
     }
 }
-echo "Status OK";
+echo "Status OK follow";
