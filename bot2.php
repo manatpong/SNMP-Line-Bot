@@ -21,26 +21,50 @@ if (!is_null($events['events'])) {
                 'type' => 'text',				
                 'text' => $content	
             ];			
+
+            replyMsg($replyToken,$messages);
             // Make a POST Request to Messaging API to reply to sender			
-            $url = 'https://api.line.me/v2/bot/message/reply';			
-            $data = [				
-                'replyToken' => $replyToken,				
-                'messages' => [$messages],
-                'stickerPackageId' => 1,
-                'stickerId' => 1,
-            ];			
-            $post = json_encode($data);			
-            $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);			
-            $ch = curl_init($url);			
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");			
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);			
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $post);			
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);			
-            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);			
-            $result = curl_exec($ch);			
-            curl_close($ch);			
-            echo $result . "";		
+            // $url = 'https://api.line.me/v2/bot/message/reply';			
+            // $data = [				
+            //     'replyToken' => $replyToken,				
+            //     'messages' => [$messages],
+            //     'stickerPackageId' => 1,
+            //     'stickerId' => 1,
+            // ];			
+            // $post = json_encode($data);			
+            // $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);			
+            // $ch = curl_init($url);			
+            // curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");			
+            // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);			
+            // curl_setopt($ch, CURLOPT_POSTFIELDS, $post);			
+            // curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);			
+            // curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);			
+            // $result = curl_exec($ch);			
+            // curl_close($ch);			
+            // echo $result . "";		
         // }	
     }
 }
-echo "Status OK follow 2";
+
+function replyMsg($token, $msg) {
+    global $access_token;
+    $url = 'https://api.line.me/v2/bot/message/reply';			
+    $data = [				
+        'replyToken' => $token,				
+        'messages' => [$msg],
+        'stickerPackageId' => 1,
+        'stickerId' => 1,
+    ];			
+    $post = json_encode($data);			
+    $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);			
+    $ch = curl_init($url);			
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");			
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);			
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $post);			
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);			
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);			
+    $result = curl_exec($ch);			
+    curl_close($ch);			
+    echo $result . "";		
+}
+echo "Status OK follow";
