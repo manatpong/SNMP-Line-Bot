@@ -43,4 +43,4 @@ if (!is_null($events['events'])) {
         }	
     }
 }
-echo "Status OK";
+echo "Status OK new";
