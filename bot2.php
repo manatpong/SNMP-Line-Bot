@@ -16,7 +16,7 @@ if (!is_null($events['events'])) {
             // Get replyToken			
             $replyToken = $event['replyToken'];	
             
-            $profileDat = getProfile($event['userId']);
+            $profileDat = getProfile($event['source']['userId']);
             // Build message to reply back			
             $messages = [				
                 'type' => 'text',				
