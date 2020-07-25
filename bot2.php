@@ -16,7 +16,7 @@ if (!is_null($events['events'])) {
             // Get replyToken			
             $replyToken = $event['replyToken'];	
             
-            $profileDat = getProfile();
+            $profileDat = getProfile($event['userId']);
             // Build message to reply back			
             $messages = [				
                 'type' => 'text',				
@@ -47,10 +47,10 @@ if (!is_null($events['events'])) {
     }
 }
 
-function getProfile() {
+function getProfile($userId) {
     // https://api.line.me/v2/bot/profile/U37f8dafe34f353b80739886cfa2194a1
     global $access_token;
-    $url = 'https://api.line.me/v2/bot/profile/U37f8dafe34f353b80739886cfa2194a1';				
+    $url = 'https://api.line.me/v2/bot/profile/'.$userId;				
     // $post = json_encode($data);			
     $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);			
     $ch = curl_init($url);			
@@ -85,4 +85,4 @@ function replyMsg($replyToken, $msg) {
     curl_close($ch);			
     echo $result . "";		
 }
-echo "Status OK follow";
+echo "Status OK profile";
