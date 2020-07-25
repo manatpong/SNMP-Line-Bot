@@ -43,4 +43,4 @@ if (!is_null($events['events'])) {
         // }	
     }
 }
-echo "Status OK follow2";
+echo "Status OK follow 2";
